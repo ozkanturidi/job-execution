@@ -8,7 +8,9 @@ on:
         type: string
         description: "The name of the workflow to run"
     outputs:
-      result: ${{ jobs.deploy.outputs.outcome }}
+      result:
+        description: "The result of the workflow"
+        value: ${{ jobs.deploy.outputs.outcome }}
   #   secrets:
   #    secret_name:
   #     required: false
