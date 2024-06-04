@@ -70,6 +70,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/reusable-flow.yml
+    with:
+      workflow_name: dist-files
   report:
     if: failure()
     needs: [lint, deploy]
