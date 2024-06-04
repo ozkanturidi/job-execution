@@ -15,5 +15,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ inputs.workflow_name  }}
+      - name: Output files
+        run: ls
       - name: Output information
         run: echo "Deploying & uploading code"
