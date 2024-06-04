@@ -7,8 +7,16 @@ on:
         default: dist
         type: string
         description: "The name of the workflow to run"
+    outputs:
+      result: ${{jobs.deploy.outputs.outcome}}
+  #   secrets:
+  #    secret_name:
+  #     required: false
+  #    description: "A secret to pass to the workflow"
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.print-result.outputs.result }}
     runs-on: ubuntu-latest
     steps:
       - name: Get Artifacts
@@ -17,5 +25,8 @@ jobs:
           name: ${{ inputs.workflow_name  }}
       - name: Output files
         run: ls
+      - name: Print result
+        id: print-result
+        run: echo "result=success" >> $GITHUB_OUTPUT
       - name: Output information
         run: echo "Deploying & uploading code"

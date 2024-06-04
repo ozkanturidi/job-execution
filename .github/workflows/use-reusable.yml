@@ -72,6 +72,14 @@ jobs:
     uses: ./.github/workflows/reusable-flow.yml
     with:
       workflow_name: dist-files
+    # secrets:
+    # secret_name: ${{ secrets.SECRET_NAME }}
+  print:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outcome
+        run: echo " outcome--> ${{needs.deploy.outputs.outcome}}"
   report:
     if: failure()
     needs: [lint, deploy]
